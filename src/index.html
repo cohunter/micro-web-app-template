@@ -64,7 +64,6 @@
                 this.updateTimer = setInterval(() => {
                     this.setState({ idx: randomQuote() });
                 }, 60*1000);
-                console.log("componentDidMount()");
             }
             componentWillUnmount() {
                 console.log("componentWillUnmount()")
