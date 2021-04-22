@@ -1,0 +1,22 @@
+{
+    "short_name": "Quote",
+    "name": "Quote of the Day",
+    "description": "Show a new quote each day",
+    "icons": [
+      {
+        "src": "/favicon.ico",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/logo.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/#source=pwa",
+    "background_color": "#CC0",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#CC0"
+}

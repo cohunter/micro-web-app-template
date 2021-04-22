@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Standard HTML5 document.
+        This is the minimal template.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Quote of the Day</title>
+    <!--
+        The Web Manifest can't have comments inside of it.
+    -->
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <!-- This image should to be 180x180 -->
+    <link rel="apple-touch-icon" href="/logo.png">
+
+    <!--
+        The Service Worker script path must be directly below the root path (/)
+        to be allowed to use the root scope (/) in the manifest.
+    -->
+    <script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => { console.log('Service Worker Registered'); })
+        .catch((err) => console.error('SW error:', err));
+    }
+    </script>
+    <!--
+        Preact as module
+
+        This is done so that there is no build step, for quick/easy testing.
+
+        You can drag-and-drop this project right onto your FTP!
+
+        It can easily be updated by linking to unpkg instead of local versions,
+        or to include a build step so that JSX/etc are available.
+    -->
+    <script type="module">
+        import { h, Component, render } from './lib/preact.module.js';
+
+        const quotes = [
+            ["“Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way.”", "– Michael Scott"],
+            ["“He who questions training, only trains himself at asking questions.”", "- Sphinx"],
+            ['Woof woof woof! Dogs are great.', '- Dog'],
+            ["“And I knew exactly what to do. But in a much more real sense, I had no idea what to do.”", "– Michael Scott"],
+            ["“Behold my powers! I am the strongest Pokémon in the world. Stronger even than Mew.”", "– Mewtwo"]
+        ];
+
+        const randomQuote = () => Math.floor((Math.random()*quotes.length));
+
+        class QuoteDisplay extends Component {
+            constructor() {
+                super();
+                this.state = { idx: randomQuote() };
+            }
+            componentWillMount(){
+                console.log('componentWillMount()');
+            }
+            componentDidMount() {
+                console.log("componentDidMount()");
+                this.updateTimer = setInterval(() => {
+                    this.setState({ idx: randomQuote() });
+                }, 60*1000);
+                console.log("componentDidMount()");
+            }
+            componentWillUnmount() {
+                console.log("componentWillUnmount()")
+                clearInterval(this.updateTimer);
+            }
+            // render( { prop, otherprop, ... }, { state, otherstate, ... } )
+            render({}, { idx }) {
+                return h('blockquote', { textContent: quotes[idx][0], attribution: quotes[idx][1] }, null);
+            }
+        }
+
+        render(h(QuoteDisplay, null, null), document.body)
+    </script>
+    <!--
+        Basic Styles
+
+        Usually include a CSS framework like Bootstrap, Photon, Tailwind, etc..
+    -->
+    <style type="text/css">
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        max-height: 100vh;
+        margin: 0;
+        background: url("/extras/leaves_small.jpg");
+        background-size: cover;
+    }
+    blockquote {
+        background: rgba(0,0,0,0.5);
+        border-radius: 1em;
+        color: #FFF;
+        padding: 1em;
+        text-shadow: #000 0px 0px 5px;
+    }
+    blockquote::after {
+        content:attr(attribution);
+        display: block;
+        margin-top: 0.5em;
+        opacity: 0.85;
+        text-align: right;
+    }
+    </style>
+    <!-- End Styles -->
+</head>
+<body>
+    <noscript><blockquote>javascript is required to run this demo</blockquote></noscript>
+</body>
+</html>
