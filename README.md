@@ -14,7 +14,7 @@ This works with cohunter/web-app-https-starter, you can get a live URL for testi
 
 ````
 git clone https://github.com/cohunter/micro-web-app-template
-docker run -it --rm -v `pwd`/micro-web-app-template/src:/www 
+docker run -it --rm -v `pwd`/micro-web-app-template/src:/www cohunter/web-app-https-starter
 ````
 
 ## Screenshots
