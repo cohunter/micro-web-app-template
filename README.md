@@ -8,6 +8,14 @@ In Chrome on Android and Windows, this triggers the native installation prompt.
 
 Also triggers the install prompt in Brave on macOS.
 
+## Try it out
+
+This works with cohunter/web-app-https-starter, you can get a live URL for testing with valid HTTPS with just two commands:
+
+````
+git clone https://github.com/cohunter/micro-web-app-template
+docker run -it --rm -v `pwd`/micro-web-app-template/src:/www 
+````
 
 ## Screenshots
 
